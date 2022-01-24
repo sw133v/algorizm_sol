@@ -1,0 +1,1 @@
+# algorizm_sol
