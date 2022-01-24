@@ -1,57 +1,57 @@
-def is_equal(stls, lst):
-    rlst = []       #반환시킬 결과 리스트 변수
-    clst = []       #lst내부의 리스트의 길이측정을 위한 변수
-    ccnt = 1        #stls의 갯수의 최대값
+#입력단 함수
+def inp_list():
+    ip_num = int(input())
+    cpat = input().split('*')
+
+    ip_list = []
+    for i in range(ip_num):
+        ip_list += [input()]
     
-    # clst 를 구하는 코드 ------------------
-    for i in lst:
-        cnt = -1
-        for j in i:
-            cnt += 1
-        clst += [cnt]
-    # --------------------------------------
-        
-    for i in stls:
-        ccnt += 1
-    print(len(stls))
-    #리스트의 길이가 끝인지 알기위한 ck 변수
-    #ck = 0 
-    for i in lst:
+    return ip_list, cpat
+
+#리스트 길이 반환 함수
+def my_len(list):
+    cnt = 0
+    for i in list:
+        cnt += 1
+    return cnt
+
+#해당 알고리즘
+def func_nnns():
+    
+    #입력단 함수반환값으로 각 변수 초기화 및 빈 리스트 변수 생성
+    str_list, pat = inp_list()
+    result_lst = []
+    
+    for i in str_list:
+
         result = False
-        
-    #해당 인자들이 다 들어 갔는지 여부를 조사하는 k 변수 
-        k = 0
-    #첫글자가 다르면 당연히 패턴이 일치하지 않으므로 결과를 False를 결과값에 전달
-        if stls[0] != i[0]:
+        #패턴의 문자열 갯수보다 작으면 요구사항에 맞지 않으므로 결과값을 False로 할당 -- 이부분은 도움받음
+        if my_len(i) < my_len(pat[0]) + my_len(pat[1]):
             result = False
+        
+        #패턴의 문자열 보다 같거나 크면 요구사항에 만족
+        elif my_len(i) >= my_len(pat[0] + pat[1]):
             
-        else :
-            for j in i:
-                if k == ccnt - 1 and j == stls[k] and i.index(j) == clst[k]:
-                    result = True
-                elif k < ccnt - 1:
-                    if stls[k] == j:
-                        k += 1
+            #앞의 패턴과 i문자열의 슬라이스를 비교 같지않을시 결과값 False 할당
+            if i[:my_len(pat[0])] != pat[0]:
+                result = False
+            
+            #뒤의 패턴과 i문자열의 슬라이스를 비교 같지않을시 결과값 False 할당
+            elif i[-my_len(pat[1])::1] != pat[1]:
+                result = False
+            
+            #이외의 모든 결과는 참
+            else :
+                result = True
 
-                print(j, k)
-        print(result)
-        #반환값으로 쓸 result를 rlst에 합연산
         if result == True:
-            rlst += ['DA']
+            result_lst += ['DA']
         elif result == False:
-            rlst += ['NE']
+            result_lst += ['NE']
     
-    return rlst
+    for i in result_lst:
+        print(i)
+    return result_lst
 
-
-how_many = int(input())
-stls = input().split('*')
-
-lst = []
-for i in range(how_many):
-    lst += [input()]
-
-result = is_equal(stls, lst)
-
-for i in result:
-    print(i)
+func_nnns()
