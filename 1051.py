@@ -41,7 +41,3 @@ def my_solve():
     return result ** 2
 
 print(my_solve())
-    #pass
-
-
-#inp_data()
