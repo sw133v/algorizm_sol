@@ -28,8 +28,8 @@ def check(int_a, lst):
 
 def sol(int_a, lst):
     wnb = [0, 0]
-    if int_a == [1]:
-        if lst[0] == '1':
+    if int_a == 1:
+        if lst[0] == ['1']:
             return [0, 1]
         else:
             return [1, 0]
